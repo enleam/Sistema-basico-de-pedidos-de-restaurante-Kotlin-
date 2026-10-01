@@ -29,72 +29,76 @@ fun main() {
 
     val pedido = mutableMapOf<Producto, Int>()
 
-    println("=".repeat(28))
-    println("       Mi Restaurante")
-    println("=".repeat(28))
+    var opcion = 0
 
-    println("1. Ver menu")
-    println("2. Realizar pedido")
-    println("3. Ver pedido")
-    println("4. Calcular total")
-    println("5. Salir")
+    while (opcion != 5) {
+        println("=".repeat(28))
+        println("       Mi Restaurante")
+        println("=".repeat(28))
 
-    println("Seleccione la opcion: ")
-    val opcion = readln().toInt()
+        println("1. Ver menu")
+        println("2. Realizar pedido")
+        println("3. Ver pedido")
+        println("4. Calcular total")
+        println("5. Salir")
 
-    when (opcion) {
-        1 -> {
-            println("\n===========Menu===========")
+        print("Seleccione la opcion: ")
+        opcion = readln().toInt()
 
-            for (producto in menu) {
-                println("${producto.nombre} - S/. ${producto.precio}")
-            }
-        }
-        2 -> {
-            println("\n==========Realizar Pedido===========")
+        when (opcion) {
+            1 -> {
+                println("\n===========Menu===========")
 
-            for ((indice, producto) in menu.withIndex()) {
-                println("${indice + 1}. ${producto.nombre} - S/. ${producto.precio}")
-            }
-
-            println("Seleccione un producto: ")
-            val seleccion = readln().toInt()
-
-            if (seleccion in 1..menu.size) {
-                val productoSeleccionado = menu[seleccion - 1]
-
-                println("Ingrese cantidad: ")
-                val cantidad = readln().toInt()
-
-                pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
-
-                println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
-            } else {
-                println("Producto no valido.")
-            }
-        }
-        3 -> {
-            println("\n==========Mi Pedido===========")
-
-            if (pedido.isEmpty()) {
-                println("El pedido esta vacio.")
-            } else {
-                for ((producto, cantidad) in pedido) {
-                    println("${producto.nombre} x$cantidad")
+                for (producto in menu) {
+                    println("${producto.nombre} - S/. ${producto.precio}")
                 }
             }
-        }
-        4 -> {
-            println("\n==========Total===========")
+            2 -> {
+                println("\n==========Realizar Pedido===========")
 
-            if (pedido.isEmpty()) {
-                println("El pedido esta vacio.")
-            } else {
-                val total = calcularTotal(pedido)
-                println("Total a pagar: S/. $total")
+                for ((indice, producto) in menu.withIndex()) {
+                    println("${indice + 1}. ${producto.nombre} - S/. ${producto.precio}")
+                }
+
+                println("Seleccione un producto: ")
+                val seleccion = readln().toInt()
+
+                if (seleccion in 1..menu.size) {
+                    val productoSeleccionado = menu[seleccion - 1]
+
+                    println("Ingrese cantidad: ")
+                    val cantidad = readln().toInt()
+
+                    pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
+
+                    println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
+                } else {
+                    println("Producto no valido.")
+                }
             }
+            3 -> {
+                println("\n==========Mi Pedido===========")
+
+                if (pedido.isEmpty()) {
+                    println("El pedido esta vacio.")
+                } else {
+                    for ((producto, cantidad) in pedido) {
+                        println("${producto.nombre} x$cantidad")
+                    }
+                }
+            }
+            4 -> {
+                println("\n==========Total===========")
+
+                if (pedido.isEmpty()) {
+                    println("El pedido esta vacio.")
+                } else {
+                    val total = calcularTotal(pedido)
+                    println("Total a pagar: S/. $total")
+                }
+            }
+            5 -> println("Gracias por visitar Mi Restaurante.")
+            else -> println("Opcion Invalida. Debe estar entre 1 y 5.")
         }
-        5 -> println("Has seleccionado: Salir")
-        else -> println("Opcion Invalida. Debe estar entre 1 y 5.")
     }
 }
