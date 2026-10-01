@@ -63,7 +63,17 @@ fun main() {
                 println("Producto no valido.")
             }
         }
-        3 -> println("Has seleccionado: Ver pedido")
+        3 -> {
+            println("\n==========Mi Pedido===========")
+
+            if (pedido.isEmpty()) {
+                println("El pedido esta vacio.")
+            } else {
+                for ((producto, cantidad) in pedido) {
+                    println("${producto.nombre} x$cantidad")
+                }
+            }
+        }
         4 -> println("Has seleccionado: Calcular total")
         5 -> println("Has seleccionado: Salir")
         else -> println("Opcion Invalida. Debe estar entre 1 y 5.")
