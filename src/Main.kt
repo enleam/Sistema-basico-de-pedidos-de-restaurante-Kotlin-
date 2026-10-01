@@ -57,7 +57,7 @@ fun main() {
                 println("${indice + 1}. ${producto.nombre} - S/. ${producto.precio}")
             }
 
-            println("Seleccione un pedido: ")
+            println("Seleccione un producto: ")
             val seleccion = readln().toInt()
 
             if (seleccion in 1..menu.size) {
@@ -66,7 +66,7 @@ fun main() {
                 println("Ingrese cantidad: ")
                 val cantidad = readln().toInt()
 
-                pedido[productoSeleccionado] = cantidad
+                pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
 
                 println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
             } else {
