@@ -3,6 +3,16 @@ class Producto (
     val precio: Double
 )
 
+fun calcularTotal(pedido: Map<Producto, Int>): Double {
+    var total = 0.0
+
+    for ((producto, cantidad) in pedido) {
+        total += producto.precio * cantidad
+    }
+
+    return total
+}
+
 fun main() {
 
     val hamburguesa = Producto("Hamburguesa", 15.0)
@@ -74,7 +84,16 @@ fun main() {
                 }
             }
         }
-        4 -> println("Has seleccionado: Calcular total")
+        4 -> {
+            println("\n==========Total===========")
+
+            if (pedido.isEmpty()) {
+                println("El pedido esta vacio.")
+            } else {
+                val total = calcularTotal(pedido)
+                println("Total a pagar: S/. $total")
+            }
+        }
         5 -> println("Has seleccionado: Salir")
         else -> println("Opcion Invalida. Debe estar entre 1 y 5.")
     }
