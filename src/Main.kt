@@ -52,6 +52,9 @@ fun main() {
                 for (producto in menu) {
                     println("${producto.nombre} - S/. ${producto.precio}")
                 }
+
+                println("Presione Enter para regresar al menu principal...")
+                readln()
             }
             2 -> {
                 println("\n==========Realizar Pedido===========")
@@ -69,12 +72,19 @@ fun main() {
                     println("Ingrese cantidad: ")
                     val cantidad = readln().toInt()
 
-                    pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
+                    if (cantidad > 0) {
+                        pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
 
-                    println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
+                        println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
+                    } else {
+                        println("La cantidad debe ser mayor a 0.")
+                    }
                 } else {
                     println("Producto no valido.")
                 }
+
+                println("Presione Enter para regresar al menu principal...")
+                readln()
             }
             3 -> {
                 println("\n==========Mi Pedido===========")
@@ -86,6 +96,9 @@ fun main() {
                         println("${producto.nombre} x$cantidad")
                     }
                 }
+
+                println("Presione Enter para regresar al menu principal...")
+                readln()
             }
             4 -> {
                 println("\n==========Total===========")
@@ -96,6 +109,9 @@ fun main() {
                     val total = calcularTotal(pedido)
                     println("Total a pagar: S/. $total")
                 }
+
+                println("Presione Enter para regresar al menu principal...")
+                readln()
             }
             5 -> println("Gracias por visitar Mi Restaurante.")
             else -> println("Opcion Invalida. Debe estar entre 1 y 5.")
