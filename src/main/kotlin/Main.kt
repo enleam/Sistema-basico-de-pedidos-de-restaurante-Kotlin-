@@ -14,18 +14,6 @@ fun calcularTotal(pedido: Map<Producto, Int>): Double {
 }
 
 fun main() {
-    val hamburguesa = Producto("Hamburguesa", 15.0)
-    val pizza = Producto("Pizza", 25.0)
-    val ceviche = Producto("Ceviche", 30.0)
-    val limonada = Producto("Limonada", 8.0)
-
-    val menu = listOf(
-        hamburguesa,
-        pizza,
-        ceviche,
-        limonada
-    )
-
     val pedido = mutableMapOf<Producto, Int>()
 
     var opcion = 0
@@ -64,28 +52,38 @@ fun main() {
             2 -> {
                 println("\n==========Realizar Pedido===========")
 
-                for ((indice, producto) in menu.withIndex()) {
-                    println("${indice + 1}. ${producto.nombre} - S/. ${producto.precio}")
-                }
+                try {
+                    val menu = obtenerProductos()
 
-                println("Seleccione un producto: ")
-                val seleccion = readln().toInt()
-
-                if (seleccion in 1..menu.size) {
-                    val productoSeleccionado = menu[seleccion - 1]
-
-                    println("Ingrese cantidad: ")
-                    val cantidad = readln().toInt()
-
-                    if (cantidad > 0) {
-                        pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
-
-                        println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
+                    if (menu.isEmpty()) {
+                        println("No hay productos disponibles.")
                     } else {
-                        println("La cantidad debe ser mayor a 0.")
+                        for ((indice, producto) in menu.withIndex()) {
+                            println("${indice + 1}. ${producto.nombre} - S/. ${producto.precio}")
+                        }
+
+                        println("Seleccione un producto: ")
+                        val seleccion = readln().toInt()
+
+                        if (seleccion in 1..menu.size) {
+                            val productoSeleccionado = menu[seleccion - 1]
+
+                            println("Ingrese cantidad: ")
+                            val cantidad = readln().toInt()
+
+                            if (cantidad > 0) {
+                                pedido[productoSeleccionado] = (pedido[productoSeleccionado] ?: 0) + cantidad
+
+                                println("${productoSeleccionado.nombre} x$cantidad agregada al pedido.")
+                            } else {
+                                println("La cantidad debe ser mayor a 0.")
+                            }
+                        } else {
+                            println("Producto no valido.")
+                        }
                     }
-                } else {
-                    println("Producto no valido.")
+                } catch (e: Exception) {
+                    println("Error al realizar el pedido: ${e.message}")
                 }
 
                 println("Presione Enter para regresar al menu principal...")
