@@ -14,7 +14,6 @@ fun calcularTotal(pedido: Map<Producto, Int>): Double {
 }
 
 fun main() {
-
     val hamburguesa = Producto("Hamburguesa", 15.0)
     val pizza = Producto("Pizza", 25.0)
     val ceviche = Producto("Ceviche", 30.0)
@@ -49,8 +48,14 @@ fun main() {
             1 -> {
                 println("\n===========Menu===========")
 
-                for (producto in menu) {
-                    println("${producto.nombre} - S/. ${producto.precio}")
+                try {
+                    val menu = obtenerProductos()
+
+                    for ((indice, producto) in menu.withIndex()) {
+                        println("${indice + 1}. ${producto.nombre} - S/. ${producto.precio}")
+                    }
+                } catch (e: Exception) {
+                    println("Error al cargar el menu: ${e.message}")
                 }
 
                 println("Presione Enter para regresar al menu principal...")
